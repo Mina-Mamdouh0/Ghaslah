@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "506427100610",
+    "project_id": "ghasla-a19f1",
+    "storage_bucket": "ghasla-a19f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506427100610:android:509358ec22de2df9151a5b",
+        "android_client_info": {
+          "package_name": "com.example.untitled"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506427100610-ej7v4n0vj7e4d30dlm7erij0g5mk0maq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.untitled",
+            "certificate_hash": "c17360daa8a36bce67678ded51d695fead0ec9ba"
+          }
+        },
+        {
+          "client_id": "506427100610-gbp14fnqph7u9u7unqdptctb8a4f48um.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkuMZiwRldg83o107k5A6kgpTBMxqvZMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506427100610-gbp14fnqph7u9u7unqdptctb8a4f48um.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
