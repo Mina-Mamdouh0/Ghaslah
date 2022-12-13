@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:untitled/modules/home_screen/home_screen.dart';
+import 'package:untitled/modules/manager_screen.dart';
 import '../../shared/colors.dart';
 import '../../shared/compoents/components.dart';
 import '../saller_module/saller_acreen.dart';
@@ -81,6 +82,18 @@ class LoginScreen extends StatelessWidget {
                                       email: loginController.text,
                                       password: passwordController.text).then((value) {
                                     Navigator.pushNamed(context, 'Scan');
+                                  });
+                                }
+                              }
+                            });
+                            FirebaseFirestore.instance.collection('Users').get().then((value) {
+                              for (var element in value.docs) {
+                                if(element.get('typeUser')=='manager'&&
+                                    element.get('email')==loginController.text){
+                                  FirebaseAuth.instance.signInWithEmailAndPassword(
+                                      email: loginController.text,
+                                      password: passwordController.text).then((value) {
+                                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>ManagerScreen()));
                                   });
                                 }
                               }

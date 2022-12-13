@@ -1,9 +1,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled/modules/welcome_screen/welcome_screen.dart';
 
 
@@ -35,12 +37,26 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
+  List msgList=[];
+  getMassage(){
+    msgList=[];
+    FirebaseFirestore.instance.collection('Massage').get().then((value) async {
+      for (var element in value.docs) {
+        setState(() {
+          msgList.add(element.get('Msg'));
+        });
+      }
+
+
+    });
+  }
+
 
   @override
   void initState() {
-
     super.initState();
     getUserDate();
+    getMassage();
   }
 
 
@@ -74,18 +90,41 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        
+                        Stack(
+                          alignment: Alignment.topRight,
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (_)=>MassageScreen(list: msgList)));
+                                },
+                                icon: const Icon(
+                                  Icons.mail_sharp,
+                                  color:Colors.white,
+                                )),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: Container(
+                                padding: const EdgeInsets.all(3),
+                                decoration: const BoxDecoration(
+                                  color: Colors.red,
+                                  shape: BoxShape.circle
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "${msgList.length}",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 18,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.mail_sharp,
-                              color: Colors.white,
-                            )),
-                        IconButton(
-                          onPressed: () {
-
-                          },
-                          icon: const Icon(
+                          onPressed: () {},
+                          icon:  const Icon(
                             Icons.settings,
                             color: Colors.white,
                           ),
@@ -320,5 +359,50 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 }
+
+class MassageScreen extends StatelessWidget {
+  final List list;
+  const MassageScreen({Key? key, required this.list}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: HexColor('#1d3666'),
+        foregroundColor: Colors.white,
+        elevation: 0.0,
+        centerTitle: true,
+        title: const Text('Massage'),
+      ),
+      body: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context,index){
+          return Container(
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: HexColor('#1d3666'),
+                width: 1
+              )
+            ),
+            child: Center(
+              child: Text(list[index],
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: HexColor('#1d3666'),
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+              )),
+            ),
+          );
+        },
+
+      ),
+    );
+  }
+}
+
 
 

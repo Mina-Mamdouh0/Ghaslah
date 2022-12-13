@@ -31,8 +31,10 @@ Widget defaultTextInput({
   required String? Function(String?)? validator,
   required String label,
   required IconData prefix,
+  int? mixLine,
 }) =>
     TextFormField(
+      maxLines: mixLine??1,
       controller: controller_,
       keyboardType: type,
       onChanged: onChanged_,

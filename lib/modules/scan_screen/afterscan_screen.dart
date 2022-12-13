@@ -13,6 +13,7 @@ class AfterScan extends StatefulWidget {
 }
 
 class _AfterScanState extends State<AfterScan> {
+  double numberPoint=0.4;
   int point = 0;
   List pointList = [];
   var pointController = TextEditingController();
@@ -39,12 +40,23 @@ class _AfterScanState extends State<AfterScan> {
       });
     });
   }
+  getNumberPoint(){
+    // 13 -- 15  14
+    FirebaseFirestore.instance.collection('Point').doc('MVtK6JdpjkQNo2zdoN8e').get().then((value){
+      if(DateTime.now().compareTo(value.get('Form'))>0 &&DateTime.now().compareTo(value.get('To'))<0){
+        setState(() {
+          numberPoint=value.get('Point');
+        });
+      }
+    });
+  }
 
 
   @override
   void initState() {
     super.initState();
     getUserDate();
+    getNumberPoint();
   }
 
   @override
@@ -98,8 +110,10 @@ class _AfterScanState extends State<AfterScan> {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          int totalPoints =
-                              (point + (int.parse(pointController.text)));
+                          //5 =>> 40*0.4 --- 10+5=15 end
+
+                          double totalPoints =
+                              (point + ((int.parse(pointController.text))*numberPoint));//con *0.4
                           FirebaseFirestore.instance
                               .collection('Users')
                               .doc(widget.userId)
@@ -126,28 +140,33 @@ class _AfterScanState extends State<AfterScan> {
                         onPressed: () {
                           loginWithPhone();
                           if (isVerified){
-                            int totalPoints =
-                            (point - (int.parse(pointController.text)));
-                            if (point >= int.parse(pointController.text)) {
-                              FirebaseFirestore.instance
-                                  .collection('Users')
-                                  .doc(widget.userId)
-                                  .update({'point': totalPoints}).then((value) {
-                                //Navigator.pop(context);
-                                setState(() {
-                                  point = totalPoints.toInt();
-                                });
-                              });
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('this point less to ')));
+                            // 10 =>>> 5*4 =20<=10? true:false
+                            if(point>=((int.parse(pointController.text))*4)){
+    int totalPoints =
+    (point - (int.parse(pointController.text)));
+    if (point <= int.parse(pointController.text)) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(widget.userId)
+        .update({'point': totalPoints}).then((value) {
+    //Navigator.pop(context);
+    setState(() {
+    point = totalPoints.toInt();
+    });
+    });
+    } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(
+    content: Text('this point less to ')));
+    }
+    }else{
+    return;
+    }
                             }
-                          }else{
-                            return;
-                          }
 
-                        },
+
+
+                          },
                         child: const Text(('minus'))),
                   ),
                 ),
