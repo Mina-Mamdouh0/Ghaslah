@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:readmore/readmore.dart';
 import 'package:untitled/modules/welcome_screen/welcome_screen.dart';
 
 
@@ -19,10 +19,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   String userName='Name';
-  int point=0;
+  double point=0;
   List pointList=[];
   double price = 0 ;
-
 
 
   getUserDate(){
@@ -43,11 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
     FirebaseFirestore.instance.collection('Massage').get().then((value) async {
       for (var element in value.docs) {
         setState(() {
-          msgList.add(element.get('Msg'));
+          msgList.add(element.data());
         });
       }
-
-
     });
   }
 
@@ -162,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         children: [
                            Text(
-                            "${price..toStringAsExponential(3)}",
+                            price.toStringAsFixed(2),
                             style: const TextStyle(fontSize: 50),
                           ),
                           Icon(
@@ -384,17 +381,36 @@ class MassageScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: HexColor('#1d3666'),
-                width: 1
               )
             ),
-            child: Center(
-              child: Text(list[index],
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: HexColor('#1d3666'),
-                fontWeight: FontWeight.bold,
-                fontSize: 22,
-              )),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('${list[index]['Title']}',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: HexColor('#1d3666'),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    )),
+                const SizedBox(height: 10,),
+            ReadMoreText(
+              '${list[index]['Msg']}',
+              trimLines: 2,
+              colorClickableText: Colors.pink,
+              trimMode: TrimMode.Line,
+              trimCollapsedText: 'Show more',
+              trimExpandedText: 'Show less',
+              style: TextStyle(fontSize: 18,
+                  color: HexColor('#1d3666'),
+                  fontWeight: FontWeight.normal),
+              moreStyle:  TextStyle(fontSize: 18,
+                  color: HexColor('#1d3666'),
+                  fontWeight: FontWeight.bold),
+            ),
+              ],
             ),
           );
         },

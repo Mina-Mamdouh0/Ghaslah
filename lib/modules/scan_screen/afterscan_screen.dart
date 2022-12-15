@@ -163,9 +163,6 @@ class _AfterScanState extends State<AfterScan> {
     return;
     }
                             }
-
-
-
                           },
                         child: const Text(('minus'))),
                   ),

@@ -1,7 +1,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:untitled/modules/welcome_screen/welcome_screen.dart';
 import 'package:untitled/shared/compoents/components.dart';
 
 class ManagerScreen extends StatefulWidget {
@@ -15,6 +17,7 @@ class _ManagerScreenState extends State<ManagerScreen> {
   double point = 0.4;
   var pointController = TextEditingController();
   var msgController = TextEditingController();
+  var titleController = TextEditingController();
   DateTime? dateTo;
   DateTime? dateForm;
 
@@ -28,6 +31,18 @@ class _ManagerScreenState extends State<ManagerScreen> {
         elevation: 0.0,
         centerTitle: true,
         title: const Text('Manager'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut().then((value){
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const WelcomeScreen()));
+                });
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              )),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -180,6 +195,21 @@ class _ManagerScreenState extends State<ManagerScreen> {
                   child: const Text(('Submit'))),
               const Divider(height: 10,color: Colors.black,),
               defaultTextInput(
+                controller_: titleController,
+                type: TextInputType.text,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "point must not be empty";
+                  }
+                  return null;
+                },
+                label: 'Title',
+                prefix: Icons.password_outlined,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              defaultTextInput(
                 mixLine: 10,
                 controller_: msgController,
                 type: TextInputType.text,
@@ -200,6 +230,7 @@ class _ManagerScreenState extends State<ManagerScreen> {
                     if(msgController.text.isNotEmpty){
                       FirebaseFirestore.instance.collection('Massage').add({
                         'Msg':msgController.text,
+                        'Title':titleController.text,
                       });
                     }
                   },
