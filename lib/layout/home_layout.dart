@@ -13,9 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _auth = FirebaseAuth.instance;
+/*  final _auth = FirebaseAuth.instance;
 
-  late User signedInUser;
+  //late User signedInUser;
 
   @override
   void initState() {
@@ -29,11 +29,12 @@ class _HomePageState extends State<HomePage> {
       if (user != null) {
         signedInUser = user;
         print(signedInUser.email);
+        print(signedInUser.uid);
       }
     } catch (e) {
       print(e);
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {

@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     defaultTextButton(
                         function: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => LoginScreen()));
@@ -54,7 +54,7 @@ class WelcomeScreen extends StatelessWidget {
                       height: 15.0,
                     ),
                     defaultTextButton(
-                      function: () {Navigator.push(
+                      function: () {Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>  const SignUpScreen()));},

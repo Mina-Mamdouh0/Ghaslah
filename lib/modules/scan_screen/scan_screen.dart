@@ -7,6 +7,8 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:untitled/modules/scan_screen/afterscan_screen.dart';
 
+import '../welcome_screen/welcome_screen.dart';
+
 class ScanScreen extends StatefulWidget {
   const ScanScreen({Key? key}) : super(key: key);
 
@@ -18,8 +20,8 @@ class _ScanScreenState extends State<ScanScreen> {
   String typeAccount='Client';
   var qrStar = "let's Scan it";
   String userName='name';
-  double price = 0 ;
-  int points = 0;
+  double price = 0.0 ;
+  double points = 0;
   getUserDate(){
     FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid)
         .get().then((value){
@@ -63,7 +65,7 @@ class _ScanScreenState extends State<ScanScreen> {
         leading:  Container(),
         title: Row(
           children: [
-             Text("${price.toStringAsFixed(2)}"),
+             Text(price.toStringAsFixed(2)),
             const SizedBox(
               width: 15.0,
             ),
@@ -76,6 +78,19 @@ class _ScanScreenState extends State<ScanScreen> {
               width: 110.0,
             ),
             Text(userName),
+            const SizedBox(
+              width: 110.0,
+            ),
+            (typeAccount=='Client')?Container():IconButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut().then((value){
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const WelcomeScreen()));
+                  });
+                },
+                icon: const Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                )),
           ],
         ),
       ),
