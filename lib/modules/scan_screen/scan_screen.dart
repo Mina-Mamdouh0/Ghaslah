@@ -14,6 +14,7 @@ class ScanScreen extends StatefulWidget {
 
   @override
   State<ScanScreen> createState() => _ScanScreenState();
+  //mina
 }
 
 class _ScanScreenState extends State<ScanScreen> {
