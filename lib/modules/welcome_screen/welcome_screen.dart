@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:untitled/shared/colors.dart';
+import 'package:GHASLAH/shared/colors.dart';
 
 import '../../shared/compoents/components.dart';
+import '../../signin_client.dart';
 import '../login_screen/login_screen.dart';
 import '../signup_screen/signup_screen.dart';
 
@@ -57,7 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                       function: () {Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  const SignUpScreen()));},
+                              builder: (context) =>   LoginScreen_client()));},
                       background: HexColor("#d0c7dc"),
                       text: "Client",
                       backgroundText: Colors.black,

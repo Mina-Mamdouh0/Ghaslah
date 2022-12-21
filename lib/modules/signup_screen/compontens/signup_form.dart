@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:untitled/modules/signup_screen/privacy.dart';
+import 'package:GHASLAH/modules/signup_screen/privacy.dart';
 
 import '../../../shared/colors.dart';
 import '../../../shared/compoents/components.dart';

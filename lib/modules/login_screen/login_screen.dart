@@ -3,11 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:untitled/modules/home_screen/home_screen.dart';
-import 'package:untitled/modules/manager_screen.dart';
+import 'package:GHASLAH/modules/manager_screen.dart';
 import '../../shared/colors.dart';
 import '../../shared/compoents/components.dart';
-import '../saller_module/saller_acreen.dart';
+import '../scan_screen/scan_staff.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -81,7 +80,10 @@ class LoginScreen extends StatelessWidget {
                                   FirebaseAuth.instance.signInWithEmailAndPassword(
                                       email: loginController.text,
                                       password: passwordController.text).then((value) {
-                                    Navigator.pushNamed(context, 'Scan');
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => const ScanStaffScreen()));
                                   });
                                 }
                               }

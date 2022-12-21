@@ -3,9 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:untitled/modules/home_screen/home_screen.dart';
-import 'package:untitled/shared/colors.dart';
+import 'package:GHASLAH/modules/home_screen/home_screen.dart';
+import 'package:GHASLAH/shared/colors.dart';
 import '../../shared/compoents/components.dart';
+import 'modules/signup_screen/signup_screen.dart';
 
 class LoginScreen_client extends StatelessWidget {
   LoginScreen_client({Key? key}) : super(key: key);
@@ -53,7 +54,7 @@ class LoginScreen_client extends StatelessWidget {
                             }
                             return null ;
                           },
-                          label: 'User Name',
+                          label: 'Enter Your Email',
                           prefix: Icons.login),
                       defaultTextInput(
                         controller_: passwordController,
@@ -94,6 +95,18 @@ class LoginScreen_client extends StatelessWidget {
                           background: defaultColor,
                           text: "Login",
                           backgroundText: Colors.white),
+                      const SizedBox(
+                        height: 35.0,
+                      ),
+                      defaultTextButton(
+                        function: () {Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>   const SignUpScreen()));},
+                        background: defaultColor,
+                        text: "Sign Up",
+                        backgroundText: Colors.white,
+                      )
                     ],
                   ),
                 ),

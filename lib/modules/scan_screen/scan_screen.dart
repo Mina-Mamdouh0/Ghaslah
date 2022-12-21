@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:untitled/modules/scan_screen/afterscan_screen.dart';
+import 'package:GHASLAH/modules/scan_screen/afterscan_screen.dart';
 
 import '../welcome_screen/welcome_screen.dart';
 
@@ -66,7 +66,7 @@ class _ScanScreenState extends State<ScanScreen> {
         leading:  Container(),
         title: Row(
           children: [
-             Text(price.toStringAsFixed(2)),
+             Text(points.toStringAsFixed(2)),
             const SizedBox(
               width: 15.0,
             ),
@@ -76,11 +76,11 @@ class _ScanScreenState extends State<ScanScreen> {
               color: HexColor('#d2a049'),
             ),
             const SizedBox(
-              width: 110.0,
+              width: 70.0,
             ),
             Text(userName),
             const SizedBox(
-              width: 110.0,
+              width: 70.0,
             ),
             (typeAccount=='Client')?Container():IconButton(
                 onPressed: () {
@@ -119,8 +119,8 @@ class _ScanScreenState extends State<ScanScreen> {
               ],
             ),
             SizedBox(
-              width: 250.0,
-              height: 400.0,
+             /* width: 250.0,
+              height: 250.0,*/
               child: Image.asset(
                 'assets/images/w5.jpeg',
                 fit: BoxFit.fill,
@@ -129,7 +129,13 @@ class _ScanScreenState extends State<ScanScreen> {
             const SizedBox(
               height: 20.0,
             ),
-            (typeAccount=='Client')?
+            (typeAccount=='staff')?
+            Center(
+              child: ElevatedButton(
+                  onPressed: scanQr, child:
+              const Text(('Scanner'))),
+
+            ):
             Container(
               alignment: Alignment.topCenter,
               //height: 200.0,
@@ -178,13 +184,8 @@ class _ScanScreenState extends State<ScanScreen> {
                   ),
                 ),
               ),
-            ):
-            Center(
-               child: ElevatedButton(
-                   onPressed: scanQr, child:
-               const Text(('Scanner'))),
+            )
 
-            ),
           ],
         ),
       ),

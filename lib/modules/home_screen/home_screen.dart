@@ -1,4 +1,5 @@
 
+import 'package:GHASLAH/modules/welcome_screen/welcome_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 import 'package:readmore/readmore.dart';
-import 'package:untitled/modules/welcome_screen/welcome_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String userName='Name';
   double point=0;
   List pointList=[];
-  double price = 0 ;
+  //double price = 0 ;
 
 
   getUserDate(){
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         point=value.get('point');
         userName=value.get('name');
         pointList=value.get('listPoint');
-        price = point *0.4 ;
+        //price = double.parse(point.toString());
       });
     });
   }
@@ -159,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                         children: [
                            Text(
-                            price.toStringAsFixed(2),
+                            '$point',
                             style: const TextStyle(fontSize: 50),
                           ),
                           Icon(
@@ -328,7 +328,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   const Text('Points : '),
                                   Text(
-                                  "${price.toStringAsFixed(2)}",
+                                  "${point}",
 
                                 ),],
                               ),

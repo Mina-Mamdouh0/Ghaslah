@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:untitled/modules/welcome_screen/welcome_screen.dart';
-import 'package:untitled/shared/compoents/components.dart';
+import 'package:GHASLAH/modules/welcome_screen/welcome_screen.dart';
+import 'package:GHASLAH/shared/compoents/components.dart';
 
 class ManagerScreen extends StatefulWidget {
   const ManagerScreen({Key? key}) : super(key: key);
