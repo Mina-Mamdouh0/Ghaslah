@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:506427100610:android:509358ec22de2df9151a5b",
         "android_client_info": {
-          "package_name": "com.example.untitled"
+          "package_name": "com.ghaslah.untitled"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "506427100610-ej7v4n0vj7e4d30dlm7erij0g5mk0maq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.untitled",
+            "package_name": "com.ghaslah.untitled",
             "certificate_hash": "c17360daa8a36bce67678ded51d695fead0ec9ba"
           }
         },
